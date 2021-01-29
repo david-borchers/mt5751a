@@ -1,0 +1,13 @@
+Package: mt5751a
+Type: Package
+Title: Functions for the first part of MT5751
+Version: 1.0
+Date: 2021-01-30
+Author: David Borchers
+Maintainer: David Borchers <dlb@st-andrews.ac.uk>
+Description: Plot sampling and capture-recapture functions for use in MT5751.
+License: GPL (>= 2)
+Depends:
+    MASS (>= 7.3-23),
+LinkingTo: MASS
+RoxygenNote: 7.1.1
