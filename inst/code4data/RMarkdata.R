@@ -35,4 +35,4 @@ ggcorrplot(est.Mb$beta.corrmatrix, type="lower",lab=TRUE)
 ggcorrplot(est.Mh2$beta.corrmatrix, type="lower",lab=TRUE)
 
 edwards.eberhardt = ch
-save(edwards.eberhardt,file="./data/edwards_eberhardt.Rd")
+save(edwards.eberhardt,file="./data/edwards_eberhardt.rda")

@@ -101,6 +101,7 @@ fit.cr = function(ch, model,alpha=0.05,
     # Unpack N estimate
     Nhat<- nrow(ch) + exp(mle$estimate[1])
     vcv = solve(mle$hessian)
+    se.Nhat = sqrt(delta.var(mle$estimate[1],vcv[1,1],"log"))
     ci.Nhat = nrow(ch) + exp(norm.ci(mle$estimate[1],sqrt(vcv[1,1]),alpha))
     
     # name parameters and get CIs for det pars
@@ -128,6 +129,7 @@ fit.cr = function(ch, model,alpha=0.05,
     outp =list(
         model = model,
         Nhat = c(Nhat=Nhat,
+                 se.Nhat=se.Nhat,
                  lcl.Nhat=ci.Nhat[1],
                  ucl.Nhat=ci.Nhat[2]),
         phat = pests,
@@ -301,15 +303,41 @@ make.prevcap = function(chmat) {
 make.pests = function(parnames,ests,vcv,b=FALSE,alpha=0.05) {
     np = length(parnames)-1
     phat = plogis(ests[2:(1+np)])
-    pests = matrix(c(phat,rep(NA,length(phat)*2)),ncol=3)
+    pests = matrix(c(phat,rep(NA,length(phat)*3)),ncol=4)
     row.names(pests) = parnames[2:(np+1)]
-    colnames(pests) = c("est","lcl","ucl")
-    for(i in 1:np) 
-        pests[i,2:3] = plogis(norm.ci(ests[i+1],sqrt(vcv[i+1,i+1]),alpha))
-    if(b) { # report b as ODDS
-        row.names(pests)[np] = "b(odds)"
-        pests[np,1] = exp(ests[np+1])
-        pests[np,2:3] = exp(norm.ci(ests[np+1],sqrt(vcv[np+1,np+1]),alpha))
+    colnames(pests) = c("est","se","lcl","ucl")
+    for(i in 1:np) {
+        if(i==np & b) { # report b as ODDS
+            row.names(pests)[np] = "b(odds)"
+            pests[np,1] = exp(ests[np+1])
+            pests[i,2] = sqrt(delta.var(ests[np+1],vcv[np+1,np+1],"log"))
+            pests[np,3:4] = exp(norm.ci(ests[np+1],sqrt(vcv[np+1,np+1]),alpha))
+        } else {
+            pests[i,2] = sqrt(delta.var(ests[i+1],vcv[i+1,i+1],"logit"))
+            pests[i,3:4] = plogis(norm.ci(ests[i+1],sqrt(vcv[i+1,i+1]),alpha))
+        }
     }
     return(pests)
+}
+
+#' Delta method variance
+#' 
+#' Calculated Delta Method variance for inverse log and inverse logistic link functions.
+#' 
+#' @param x Random variable that inverse transformation is applied to
+#' @param var.x Variance of \code{x}.
+#' @link Link function ('log' or 'logit').
+#' 
+#' @return
+#' The Delta Method (first order Taylor series) approximation.
+#' 
+#' @export
+delta.var = function(x,var.x,link) {
+    if(link=="logit") {
+        ex = exp(x)
+        deltavar = var.x*(ex/(1+ex)^2)^2
+    }else if(link=="log") {
+        deltavar = exp(x)*var.x
+    }else stop("Invalid link; only 'logit' and 'log' implemented.")
+    return(deltavar)
 }
