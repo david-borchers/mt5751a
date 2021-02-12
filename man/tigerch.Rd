@@ -17,7 +17,7 @@ tigerch
 \description{
 Simulated capture history from a simulated population of 81 tigers in the Sundarbans
 region of India. Simulation is based on a real camera trap survey of the tigers. (Object 
-\link{tigersecr} contains the same data, but with spatial capture information.)
+\link{tigersecrch} contains the same data, but with spatial capture information.)
 }
 \examples{
  data(tigerch)

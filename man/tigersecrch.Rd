@@ -21,3 +21,6 @@ region of India. Simulation is based on a real camera trap survey of the tigers.
 \examples{
  data(tigersecrch)
 }
+\seealso{
+\code{\link{tigermask}}
+}

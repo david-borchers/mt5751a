@@ -326,7 +326,7 @@ make.pests = function(parnames,ests,vcv,b=FALSE,alpha=0.05) {
 #' 
 #' @param x Random variable that inverse transformation is applied to
 #' @param var.x Variance of \code{x}.
-#' @link Link function ('log' or 'logit').
+#' @param link Link function ('log' or 'logit').
 #' 
 #' @return
 #' The Delta Method (first order Taylor series) approximation.
