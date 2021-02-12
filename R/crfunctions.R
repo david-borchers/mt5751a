@@ -337,7 +337,7 @@ delta.var = function(x,var.x,link) {
         ex = exp(x)
         deltavar = var.x*(ex/(1+ex)^2)^2
     }else if(link=="log") {
-        deltavar = exp(x)*var.x
+        deltavar = exp(x)^2*var.x
     }else stop("Invalid link; only 'logit' and 'log' implemented.")
     return(deltavar)
 }

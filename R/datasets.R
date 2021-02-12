@@ -5,7 +5,7 @@
 #' @docType data
 #' @description Simulated capture history from a simulated population of 81 tigers in the Sundarbans
 #' region of India. Simulation is based on a real camera trap survey of the tigers. (Object 
-#' \link{tigersecr} contains the same data, but with spatial capture information.)
+#' \link{tigersecrch} contains the same data, but with spatial capture information.)
 #' @usage tigerch
 #' @format A capture history matrix of 56 animals (rows) on 5 occasions (columns), with 0 representing
 #' not captured and 1 representing captured.
@@ -25,7 +25,7 @@ NULL
 #' \link{tigerch} contains the same capture history data, but with spatial capture information removed.)
 #' @usage tigersecrch
 #' @format An \code{secr} \code{capthist} object containing 56 animals on 5 occasions.
-#' 
+#' @seealso \code{\link{tigermask}} 
 #' @source Simulated
 #' @examples
 #'  data(tigersecrch)
