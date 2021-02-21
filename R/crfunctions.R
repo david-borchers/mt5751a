@@ -314,7 +314,8 @@ make.pests = function(parnames,ests,vcv,b=FALSE,alpha=0.05) {
             pests[np,3:4] = exp(norm.ci(ests[np+1],sqrt(vcv[np+1,np+1]),alpha))
         } else {
             pests[i,2] = sqrt(delta.var(ests[i+1],vcv[i+1,i+1],"logit"))
-            pests[i,3:4] = plogis(norm.ci(ests[i+1],sqrt(vcv[i+1,i+1]),alpha))
+            z.alpha = abs(qnorm(alpha/2))
+            pests[i,3:4] = plogis(ests[i+1] + c(-1,1)*z.alpha*sqrt(vcv[i+1,i+1]))
         }
     }
     return(pests)
