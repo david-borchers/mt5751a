@@ -42,7 +42,9 @@ plotsample_est = function(n,p,alpha=0.05,method="lognormal",dbn="binomial",B=999
   if(dbn=="bootstrap") {
     b.Nhat = rep(NA,B)
     for(i in 1:B) b.Nhat[i] = sum(sample(n,size=length(n),replace=TRUE))/p
-    se.Nhat = sqrt(var(b.Nhat))
+    se.Nhat = sqrt(var(b.Nhat)*(B-1)/B)
+    K = length(n)
+    se.Nhat = se.Nhat*sqrt(K/(K-1))
     Nhat = sum(n)/p
     cv.Nhat = se.Nhat/mean(b.Nhat)
     if(method=="normal") {

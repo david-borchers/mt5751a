@@ -123,7 +123,7 @@ NULL
 #' @docType data
 #' @description Simulated plot sample data from 20 plots in a 100m by 100m survey region.
 #' @usage plotsample1
-#' @format A data frame with one row per plot and columns \code{stratum}, \code{transect} (plot), \code{A} 
+#' @format A data frame with one row per plot and columns \code{stratum}, \code{plot}, \code{A} 
 #' (stratum area), \code{a} (plot area), and \code{n} (count of whale groups in plot).
 #' @source Simulated 
 #' @examples
@@ -139,7 +139,7 @@ NULL
 #' @docType data
 #' @description Simulated plot sample data from 20 plots in a 100m by 100m survey region.
 #' @usage plotsample2
-#' @format A data frame with one row per plot and columns \code{stratum}, \code{transect} (plot), \code{A} 
+#' @format A data frame with one row per plot and columns \code{stratum}, \code{plot}, \code{A} 
 #' (stratum area), \code{a} (plot area), and \code{n} (count of whale groups in plot).
 #' @source Simulated 
 #' @examples
